@@ -39,8 +39,15 @@ const PORT = process.env.PORT || 4000;
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(cors({
-    origin: ["http://localhost:3000"] 
-}));
+    origin: [
+      "http://localhost:3000",                         
+      "https://cec-website-revamped.vercel.app",        
+      /\.vercel\.app$/                                 // Allow ALL Vercel preview URLs
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true
+  }));
+
 app.use(express.json());
 
 // test uploads to cloudflare r2
