@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Types ---
@@ -136,7 +136,7 @@ export default function FileCabinet() {
 						<motion.div 
 							initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
 							className="bg-white w-full max-w-4xl max-h-[85vh] overflow-hidden rounded-xl shadow-2xl flex flex-col"
-							onClick={(e) => e.stopPropagation()} 
+							onClick={(e: React.MouseEvent) => e.stopPropagation()} 
 						>
 							{/* Header */}
 							<div className="p-6 border-b flex justify-between items-start" style={{ backgroundColor: selectedEvent.folder_color || '#F4D35E' }}>
@@ -222,7 +222,7 @@ export default function FileCabinet() {
 							src={fullScreenImage} 
 							alt="Full screen view" 
 							className="max-w-full max-h-screen object-contain shadow-2xl rounded-sm"
-							onClick={(e) => e.stopPropagation()}
+							onClick={(e: React.MouseEvent) => e.stopPropagation()}
 						/>
 					</motion.div>
 				)}
