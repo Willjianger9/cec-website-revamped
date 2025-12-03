@@ -62,7 +62,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 // test upload to database
 app.get('/test-db', async (req, res) => {
     try {
-        // Query the 'notes' table we just created
+        // query test database
         const { data, error } = await supabase
             .from('notes')
             .select('*');
@@ -83,5 +83,39 @@ app.get('/', (req, res) => {
 });
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+});
+// ARCHIVE API ENDPOINTS
+// GET all events for a specific drawer (category)
+app.get('/archive/:category', async (req, res) => {
+    const { category } = req.params;
+    try {
+        const { data, error } = await supabase
+            .from('archive_events')
+            .select('*')
+            .eq('category', category)
+            .order('event_date', { ascending: false });
+        if (error)
+            throw error;
+        res.json({ success: true, data });
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Failed to fetch drawer' });
+    }
+});
+// GET all images for a specific event
+app.get('/archive/event/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { data, error } = await supabase
+            .from('archive_images')
+            .select('*')
+            .eq('event_id', id);
+        if (error)
+            throw error;
+        res.json({ success: true, data });
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Failed to fetch images' });
+    }
 });
 //# sourceMappingURL=index.js.map
