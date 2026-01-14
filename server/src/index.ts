@@ -41,8 +41,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.use(cors({
     origin: [
       "http://localhost:3000",                         
-      "https://cec-website-revamped.vercel.app",        
-      /\.vercel\.app$/                                 // Allow ALL Vercel preview URLs
+      "https://cec-website-revamped.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true
@@ -148,3 +147,4 @@ app.get('/archive/event/:id', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch images' });
     }
 });
+
