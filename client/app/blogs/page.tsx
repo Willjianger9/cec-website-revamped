@@ -5,23 +5,29 @@ import { useState } from "react";
 
 // Mock Data for Blogs (Can be moved to a separate file later)
 const blogs = [
-  { id: 1, title: "Title", description: "Description", category: "Concerts" },
-  { id: 2, title: "Title", description: "Description", category: "Films" },
-  { id: 3, title: "Title", description: "Description", category: "Concerts" },
-  { id: 4, title: "Title", description: "Description", category: "Festivals" },
-  { id: 5, title: "Title", description: "Description", category: "Speakers" },
-  { id: 6, title: "Title", description: "Description", category: "Films" },
+  { id: 1, title: "Title", description: "Description", category: "Concerts", date: "2023-10-01" },
+  { id: 2, title: "Title", description: "Description", category: "Films", date: "2023-11-15" },
+  { id: 3, title: "Title", description: "Description", category: "Concerts", date: "2023-09-20" },
+  { id: 4, title: "Title", description: "Description", category: "Festivals", date: "2024-01-10" },
+  { id: 5, title: "Title", description: "Description", category: "Speakers", date: "2023-12-05" },
+  { id: 6, title: "Title", description: "Description", category: "Films", date: "2024-02-01" },
 ];
 
 const categories = ["Concerts", "Films", "Festivals", "Speakers"];
 
 export default function BlogsPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   // Filter blogs based on selection (optional logic, but good for interactivity)
-  const filteredBlogs = selectedCategories.length > 0
+  const filteredBlogs = (selectedCategories.length > 0
     ? blogs.filter((blog) => selectedCategories.includes(blog.category))
-    : blogs;
+    : blogs
+  ).sort((a, b) => {
+    return sortOrder === "newest"
+      ? new Date(b.date).getTime() - new Date(a.date).getTime()
+      : new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
 
   const toggleCategory = (category: string) => {
     setSelectedCategories((prev) =>
@@ -31,25 +37,57 @@ export default function BlogsPage() {
     );
   };
 
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "newest" ? "oldest" : "newest"));
+  };
+
   return (
     <div className="min-h-screen bg-[#5b7cf7] p-8 text-white font-sans">
       {/* Header */}
-      <h1 className="text-5xl font-bold mb-8">All Blogs</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-5xl font-bold">All Blogs</h1>
+      </div>
 
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap gap-4 mb-12">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => toggleCategory(category)}
-            className={`px-8 py-3 rounded-full text-lg font-medium transition-colors ${selectedCategories.includes(category)
+      {/* Filter Buttons & Sort */}
+      <div className="flex flex-wrap justify-between items-center gap-4 mb-12">
+        <div className="flex flex-wrap gap-4">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => toggleCategory(category)}
+              className={`px-8 py-3 rounded-full text-lg font-medium transition-colors ${selectedCategories.includes(category)
                 ? "bg-[#ffc107] text-black"
                 : "bg-[#ffc107] text-white hover:bg-[#ffcd38]"
-              }`}
+                }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* Sort Button */}
+        <button
+          onClick={toggleSortOrder}
+          className="flex items-center gap-2 px-6 py-3 bg-[#ffc107] text-white hover:bg-[#ffcd38] rounded-full text-lg font-medium transition-colors"
+        >
+          <span>Sort: {sortOrder === "newest" ? "Newest" : "Oldest"}</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`transform transition-transform ${sortOrder === "newest" ? "rotate-0" : "rotate-180"}`}
           >
-            {category}
-          </button>
-        ))}
+            <path d="M3 6h18" />
+            <path d="M7 12h10" />
+            <path d="M10 18h4" />
+          </svg>
+        </button>
       </div>
 
       {/* Blog Grid */}
@@ -58,10 +96,15 @@ export default function BlogsPage() {
           <Link href={`/blogs/${blog.id}`} key={blog.id} passHref>
             <div className="bg-[#8e8e93] w-full aspect-square relative shadow-lg group cursor-pointer hover:scale-105 transition-transform duration-300">
               {/* Card Content */}
-              <div className="absolute top-4 left-4">
-                <h2 className="text-3xl font-bold text-white mb-2">
-                  {blog.title}
-                </h2>
+              <div className="absolute top-4 left-4 right-4">
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-3xl font-bold text-white">
+                    {blog.title}
+                  </h2>
+                  <span className="text-sm font-medium bg-black/20 px-2 py-1 rounded text-white">
+                    {blog.date}
+                  </span>
+                </div>
                 <p className="text-white text-lg">{blog.description}</p>
               </div>
 
