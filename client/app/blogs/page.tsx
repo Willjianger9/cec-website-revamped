@@ -16,12 +16,20 @@ const blogs = [
 const categories = ["Concerts", "Films", "Festivals", "Speakers"];
 
 export default function BlogsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   // Filter blogs based on selection (optional logic, but good for interactivity)
-  const filteredBlogs = selectedCategory
-    ? blogs.filter((blog) => blog.category === selectedCategory)
+  const filteredBlogs = selectedCategories.length > 0
+    ? blogs.filter((blog) => selectedCategories.includes(blog.category))
     : blogs;
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#5b7cf7] p-8 text-white font-sans">
@@ -33,12 +41,8 @@ export default function BlogsPage() {
         {categories.map((category) => (
           <button
             key={category}
-            onClick={() =>
-              setSelectedCategory(
-                selectedCategory === category ? null : category
-              )
-            }
-            className={`px-8 py-3 rounded-full text-lg font-medium transition-colors ${selectedCategory === category
+            onClick={() => toggleCategory(category)}
+            className={`px-8 py-3 rounded-full text-lg font-medium transition-colors ${selectedCategories.includes(category)
                 ? "bg-[#ffc107] text-black"
                 : "bg-[#ffc107] text-white hover:bg-[#ffcd38]"
               }`}
