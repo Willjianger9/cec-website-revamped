@@ -3,20 +3,90 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 // Configure local fonts
-const akkurat = localFont({
+const helveticaNeue = localFont({
   src: [
     {
-      path: "../public/fonts/Akkurat-Normal.ttf",
+      path: "../public/fonts/helvetica-neue/HelveticaNeueUltraLight.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueUltraLightItalic.otf",
+      weight: "100",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueThin.otf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueThinItalic.otf",
+      weight: "200",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueLight.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueLightItalic.otf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueRoman.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/Akkurat-Bold.ttf",
+      path: "../public/fonts/helvetica-neue/HelveticaNeueItalic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueMedium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueMediumItalic.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueBold.otf",
       weight: "700",
       style: "normal",
     },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueBoldItalic.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueHeavy.otf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueHeavyItalic.otf",
+      weight: "800",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueBlack.otf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/helvetica-neue/HelveticaNeueBlackItalic.otf",
+      weight: "900",
+      style: "italic",
+    },
   ],
-  variable: "--font-akkurat",
+  variable: "--font-helvetica-neue",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +102,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* Apply the font class to the body */}
-      <body className={akkurat.className}>
+      <body className={helveticaNeue.className}>
         {children}
       </body>
     </html>
