@@ -100,9 +100,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       {/* Apply the font class to the body */}
-      <body className={helveticaNeue.className}>
+      <body className={helveticaNeue.className} suppressHydrationWarning>
         {children}
       </body>
     </html>
