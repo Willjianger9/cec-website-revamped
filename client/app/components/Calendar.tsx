@@ -134,7 +134,7 @@ const Calendar = () => {
                                     key={event.id}
                                     className="absolute z-10 cursor-pointer flex justify-center items-center hover:z-50"
                                     style={{
-                                        top: '8%',
+                                        top: '15%',
                                         left: '50%',
                                         transform: `translateX(-50%) rotate(${event.rotation || 0}deg)`,
                                         width: '85%',
