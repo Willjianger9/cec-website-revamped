@@ -146,8 +146,6 @@ export default function Home() {
         </div>
       </section>
 
-      // ... (rest of the file remains unchanged until the end)
-
       {/* Calendar Section */}
       <section className="h-screen w-full flex items-center justify-center bg-black p-4 md:p-8">
         <div className="w-full h-full max-h-[90vh]">
