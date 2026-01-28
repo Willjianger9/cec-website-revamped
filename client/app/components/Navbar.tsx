@@ -20,7 +20,7 @@ export default function Navbar() {
         >
             <div className="flex items-center space-x-6">
                 {/* Logo */}
-                <div className="hover:scale-105 transition-transform cursor-pointer overflow-hidden">
+                <a href="/" className="hover:scale-105 transition-transform cursor-pointer overflow-hidden block">
                     <Image
                         src="/cec_logo_square.png"
                         alt="CEC Logo"
@@ -29,7 +29,7 @@ export default function Navbar() {
                         className="object-contain"
                         unoptimized
                     />
-                </div>
+                </a>
 
                 {/* Social Icons */}
                 <div className="flex items-center space-x-5">
