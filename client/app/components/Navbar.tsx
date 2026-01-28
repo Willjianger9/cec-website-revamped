@@ -42,7 +42,7 @@ export default function Navbar() {
 
             <div className="flex items-center space-x-8">
                 <div className="flex space-x-8 text-black font-bold text-lg">
-                    <a href="#" className="hover:opacity-70 transition-opacity">Calendar</a>
+                    <a href="/calendar" className="hover:opacity-70 transition-opacity">Calendar</a>
                     <a href="#" className="hover:opacity-70 transition-opacity">Archive</a>
                     <a href="#" className="hover:opacity-70 transition-opacity">About</a>
                 </div>
